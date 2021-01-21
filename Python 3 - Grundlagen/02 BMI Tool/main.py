@@ -9,19 +9,48 @@ Multiline comments
 
 name=input('Name:')
 print('Hallo',name,sep=' ')
-
-gewicht=input('Gewicht:')
 koerpergroesse=input('Körpergrösse:')
-bmi=round(float(gewicht)/(float(koerpergroesse)**2),2)
 
-# BMI calculate
-print(name,'dein BMI ist',bmi)
+bmi=0
+bmis=[]
+datenspeicher={}
 
-if bmi>=25:
-    print('Sie sind leider Übergewichtig!')
-elif bmi<18.5:
-    print('Sie sind leider Untergewichtig!')
-else:
-    print('Normalgewicht')
 
-input('Press Enter to Exit...')
+# for i in range(1,11):
+# while bmi<=18.5 or bmi>=25:
+while True:
+    gewicht=input('Gewicht:')
+
+    if not gewicht:
+        break
+        # continue
+
+    try:
+        bmi=round(float(gewicht)/(float(koerpergroesse)**2),2)
+    except ValueError:
+        print('Gewicht falsch angegeben!')
+        continue
+
+    # BMI calculate
+    print(name,'dein BMI ist',bmi)
+
+    if bmi>=25:
+        print('Sie sind leider Übergewichtig!')
+    elif bmi<18.5:
+        print('Sie sind leider Untergewichtig!')
+    else:
+        print('Normalgewicht')
+
+    bmis.append(bmi)
+    datenspeicher.update({name:bmis})
+
+print(bmis)
+print(datenspeicher)
+
+for bmi in bmis:
+    print('Errechnete BMI',bmi)
+
+for i in datenspeicher.items():
+    print(i)
+
+input('ENDE')
