@@ -1,56 +1,40 @@
-#!/usr/bin/phyton
+class Benutzer:
+    name=''
+    groesse=0.0
 
-def rechnen(gr):
-    gewicht=input('Gewicht:')
-    if not gewicht:
-        return
-    return round(float(gewicht)/(float(gr)**2),2)
+    # Magische Methoden (kennzeichnung __) init wird auch als Construktor verwendet
+    def __init__(self,name,groesse):
+        self.name = name
+        self.groesse = groesse
+        print('init')
 
-# Mit einem * kann man einen Parameter optional deklarieren
-def auswerten(*b):
-    if b>=25:
-        print('Sie sind leider Übergewichtig!')
-    elif b<18.5:
-        print('Sie sind leider Untergewichtig!')
-    else:
-        print('Normalgewicht')
-        
-# Mit einem = kann man einen Parameter vordefinieren
-def hinzufuegen(n,b=0.0):
-    if n in datenspeicher:
-        bmis=datenspeicher[n]
-    else:
-        bmis=[]
-    bmis.append(b)
-    datenspeicher.update({n:b})
+    # Methode mit einem verweis auf sich selbst (self)
+    def anmelden(self):
+        print('Anmeldung Benutzer:', self.name)
 
-def ausgeben():
-    for i in datenspeicher.items():
-    print(i)
+    # Magische Methode die beim löschen aufgerufen wird
+    def __del__(self):
+        print('ich werde gelöscht')
 
+    # Magische Methode die definiert was ausgegeben wir wenn das Objekt als Print ausgegeben wird
+    def __str__(self):
+        return 'Benutzer: ' + self.name
 
-name=input('Name:')
-print('Hallo',name,sep=' ')
-groesse=input('Körpergrösse:')
+# Klasse die alle eigenschaften von Benutzer erbt
+class Administrator(Benutzer):
+    kennwort=''
+    def __init__(self,name,groesse,kennwort):
+        self.name = name
+        self.groesse = groesse
+        self.kennwort = kennwort
+        print('init')
+    def __str__(self):
+        return 'Benutzer: ' + self.name + ' hat das Kennwort ' + self.kennwort
 
-datenspeicher={}
+benutzer1=Benutzer('Manuel', 1.80)
+benutzer1.anmelden()
+print(benutzer1)
+del benutzer1
 
-while True:
-    try:
-        bmi=rechnen(groesse)
-        if not bmi:
-            break
-
-    except ValueError:
-        print('Gewicht falsch angegeben!')
-        continue
-
-    # BMI calculate
-    print(name,'dein BMI ist',bmi)
-
-    auswerten(bmi)
-    hinzufuegen(name,bmi)
-
-ausgeben()
-
-input('ENDE')
+benutzer2=Administrator('Pinki',1.75,'123TestPw')
+print(benutzer2)
