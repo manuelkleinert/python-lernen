@@ -58,6 +58,26 @@ print(gruss.index('W'))
 gruss_neu=gruss.replace('l','n')
 print(gruss_neu)
 
+# String mit Platzhalter
+str1 = "Das ist der Kurs '{0}' von {1}".format("Fortgeschrittene Python-Techniken", "Joe Marini und Ralph Steyer")
+print(str1)
+
+# String mit Platzhalter Templates (Sicherer)
+from string import Template
+templ = Template("Das ist der Kurs '${title}' von ${authors}")
+str2 = templ.substitute(title='Fortgeschrittene Python-Techniken', authors="Joe Marini und Ralph Steyer")
+print(str2)
+
+# String mit Platzhalter Templates mit einem Liste (Sicherer)
+data={
+    "authors":"Joe Marini und Ralph Steyer",
+    "title":"Fortgeschrittene Python-Techniken"
+}
+    
+str3 = templ.substitute(data)
+print(str3)
+
+
 # Dictionary
 datenspeicher={}
 datenspeicher={'Alex':23.45,'Pinki':32.54}
