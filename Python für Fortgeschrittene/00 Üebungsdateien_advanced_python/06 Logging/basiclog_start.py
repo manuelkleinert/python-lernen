@@ -1,4 +1,5 @@
 # demonstrate the logging api in Python
+import logging
 
 # TODO: use the built-in logging module
 
